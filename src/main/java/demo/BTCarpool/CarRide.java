@@ -1,14 +1,14 @@
 package demo.BTCarpool;
 
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class CarRide {
     private long id;
     @Size(min=1, max=100)
     private long vehicleId;
     @Size(min=1, max=100)
-    private LocalDate date;
+    private Date date;
     @Size(min=1, max=100)
     private long employeeId;
     @Size(min=1, max=100)
@@ -17,7 +17,7 @@ public class CarRide {
     private int availableSeats;
     @Size(min=1, max=100)
 
-    public CarRide(long id, @Size(min = 1, max = 100) long vehicleId, @Size(min = 1, max = 100) LocalDate date, @Size(min = 1, max = 100) long employeeId, @Size(min = 1, max = 100) long officeId, @Size(min = 1, max = 100) int availableSeats) {
+    public CarRide(long id, @Size(min = 1, max = 100) long vehicleId, @Size(min = 1, max = 100) Date date, @Size(min = 1, max = 100) long employeeId, @Size(min = 1, max = 100) long officeId, @Size(min = 1, max = 100) int availableSeats) {
         this.id = id;
         this.vehicleId = vehicleId;
         this.date = date;
@@ -44,11 +44,11 @@ public class CarRide {
         this.vehicleId = vehicleId;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
