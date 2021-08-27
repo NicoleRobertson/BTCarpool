@@ -17,6 +17,7 @@ public class CarRide {
     private int availableSeats;
     @Size(min=1, max=100)
 
+
     public CarRide(long id, @Size(min = 1, max = 100) long vehicleId, @Size(min = 1, max = 100) Date date, @Size(min = 1, max = 100) long employeeId, @Size(min = 1, max = 100) long officeId, @Size(min = 1, max = 100) int availableSeats) {
         this.id = id;
         this.vehicleId = vehicleId;
