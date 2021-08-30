@@ -54,7 +54,7 @@ public class CarRideRepository {
         Vehicle vehicle = null;
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM vehicle where vehicle.id = " + id)) {
+             ResultSet rs = stmt.executeQuery("SELECT *from Vehicle where vehicle.id = " + id)) {
 
             if (rs.next()) {
                 vehicle = rsVehicle(rs);
@@ -64,6 +64,27 @@ public class CarRideRepository {
             e.printStackTrace();
         }
         return vehicle;
+    }
+
+    /*SELECT Vehicle.id Vehicle.model, Vehicle.licenseplate, Vehicle.costpermile, Vehicle.numofseats, Employee.firstName, Employee.lastName
+    from Vehicle
+    INNER JOIN Employee ON Vehicle.Employee_id=Employee.id where vehicle.id = 1*/
+
+
+    public Employee getEmployee(long id) {
+        Employee employee = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * from Employee join on Vehicle where vehicle.id = " + id)) {
+
+            if (rs.next()) {
+                employee = rsEmployee(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
     }
 
     private StartpageCarRides rsStartpageCarRides(ResultSet rs) throws SQLException {
@@ -91,9 +112,9 @@ public class CarRideRepository {
                 rs.getInt("numofseats"),
                 rs.getDouble("costPerMile"),
                 rs.getString("licenseplate"),
-                rs.getString("carmodel"));
+                rs.getString("model"));
     }
-    private Employee rsemployee(ResultSet rs) throws SQLException {
+    private Employee rsEmployee(ResultSet rs) throws SQLException {
         return new Employee(rs.getLong("id"),
                 rs.getString("firstname"),
                 rs.getString("lastname"),

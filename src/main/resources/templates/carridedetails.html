@@ -65,27 +65,39 @@
 
 <!-- Page Content -->
 <div class="container">
-    <a href="listItems">Go back</a>
+    <a href="/">Go back</a>
     <!-- Detail page Item Heading -->
-    <h1 class="my-4" th:text="${item.description}"></h1>
+    <!--<h1 class="my-4" th:text="${item.description}"></h1>-->
+    <!--<div class="row">-->
 
-    <!-- Detail Page Item Row -->
+   <!-- Detail Page Item Row -->
     <div class="row">
 
         <div class="col-md-8">
-            <img class="img-fluid shadow" th:src="${item.imageURL}"  alt="Google maps showing route">
+            <img class="img-fluid shadow" th:src = "hummer.jpg"  alt="Google maps showing route">
+            <div class="row">
         </div>
 
         <div class="col-md-4">
             <h3 class="my-3">Car model</h3>
-            <p class="card-text" th:text="${details.carmodel}"></p>
+            <p class="card-text" th:text="${details.model}"></p>
+            <h3 class="my-3">Driver</h3>
+            <!--<p class="card-text" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></p>-->
+            <p class="card-text" th:text="${details.employeeId}"></p>
+            <h3 class="my-3">License plate</h3>
+            <p class="card-text" th:text="${details.licensePlate}"></p>
+            <h3 class="my-3">Cost per mile</h3>
+            <p class="card-text" th:text="${details.costPerMile}"></p>
+            <h3 class="my-3">Number of seats</h3>
+            <p class="card-text" th:text="${details.seats}"></p>
 
             <!-- <a th:href="'/delete/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Delete</a>
              <a th:href="'/editItem/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
              <p> </p> -->
          </div>
-     </div>
+        </div>
  </div>
+    </div>
 
  <!-- list items
 <tbody id="myTable">
