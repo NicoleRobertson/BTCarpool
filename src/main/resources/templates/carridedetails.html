@@ -78,19 +78,25 @@
 
         <div class="col-md-4">
             <h3 class="my-3">Car model</h3>
-            <p class="card-text" th:text="Driver"></p>
-            <h3 class="my-3">Category</h3>
-            <p class="card-text" th:text="License plate"></p>
-            <h3 class="my-3">Build Year</h3>
-            <p class="card-text" th:text="Cost per mile"></p>
-            <h3 class="my-3">Price</h3>
-            <p class="card-text" th:text="Total seats"></p>
-            <a th:href="'/delete/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Delete</a>
-            <a th:href="'/editItem/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
-            <p> </p>
-        </div>
-    </div>
-</div>
+            <p class="card-text" th:text="${details.carmodel}"></p>
+
+            <!-- <a th:href="'/delete/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Delete</a>
+             <a th:href="'/editItem/' + ${item.id}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+             <p> </p> -->
+         </div>
+     </div>
+ </div>
+
+ <!-- list items
+<tbody id="myTable">
+<tr  th:each="CarRide : ${publishedCarRides}">  camelcase?
+    <td><a th:href="'/' + ${CarRide.id}" p th:text="${CarRide.date}" /></td>
+    <td><a th:href="'/' + ${CarRide.id}" p th:text="${CarRide.officeName}" /></td>
+    <td><a th:href="'/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
+    <td><a th:href="'/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
+    <td><a th:href="'/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
+</tr>
+</tbody> -->
 
 <!-- /.row -->
 

@@ -22,12 +22,12 @@ public class BtCarpoolController {
         return "startpage";
     }
 
-   /* @GetMapping("/{id}")
-    public String recipe(Model model, @PathVariable int id) {
-        Recipe recipe = repository.getRecipe(id);
-        model.addAttribute("recipe", recipe);
+   @GetMapping("/{id}")
+    public String details(Model model, @PathVariable int id) {
+        Vehicle details = repository.getVehicle(id);
+        model.addAttribute("details", details);
 
-        return "Recipe";
-    } */
+        return "carridedetails";
+    }
 
 }

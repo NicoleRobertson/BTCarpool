@@ -7,7 +7,7 @@ public class Vehicle {
     @Size(min=1, max=100)
     private long employeeId;
     @Size(min=1, max=100)
-    private int seats;
+    private int numofseats;
     @Size(min=1, max=100)
     private double costPerMile;
     @Size(min=1, max=100)
@@ -17,10 +17,10 @@ public class Vehicle {
     @Size(min=1, max=100)
 
 
-    public Vehicle(long id, @Size(min = 1, max = 100) long employeeId, @Size(min = 1, max = 100) int seats, @Size(min = 1, max = 100) double costPerMile, @Size(min = 1, max = 100) String licensePlate, @Size(min = 1, max = 100) String carModel) {
+    public Vehicle(long id, @Size(min = 1, max = 100) long employeeId, @Size(min = 1, max = 100) int numofseats, @Size(min = 1, max = 100) double costPerMile, @Size(min = 1, max = 100) String licensePlate, @Size(min = 1, max = 100) String carModel) {
         this.id = id;
         this.employeeId = employeeId;
-        this.seats = seats;
+        this.numofseats = numofseats;
         this.costPerMile = costPerMile;
         this.licensePlate = licensePlate;
         this.carModel = carModel;
@@ -45,11 +45,11 @@ public class Vehicle {
     }
 
     public int getSeats() {
-        return seats;
+        return numofseats;
     }
 
     public void setSeats(int seats) {
-        this.seats = seats;
+        this.numofseats = seats;
     }
 
     public double getCostPerMile() {
