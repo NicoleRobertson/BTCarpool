@@ -20,4 +20,4 @@ Nice to Have:
 - Possibility to book single tour ride
 - Change available seats from default per ride
 - Display a visualization of how many available seats
-- GoogleMaps
+- GoogleMapsgi

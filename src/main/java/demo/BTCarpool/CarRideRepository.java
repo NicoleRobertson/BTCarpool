@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +84,22 @@ public class CarRideRepository {
         return employee;
     }
 
+    public Address getAddress() {
+        Address address = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * from Address")) {
+
+            if (rs.next()) {
+                address = rsAddress(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
+
     private StartpageCarRides rsStartpageCarRides(ResultSet rs) throws SQLException {
         return new StartpageCarRides(rs.getLong("id"),
                 rs.getDate("RIDEDATE"),
@@ -121,4 +134,87 @@ public class CarRideRepository {
                 rs.getBoolean("hascar"),
                 rs.getInt("address_id"),
                 rs.getString("username"));
-}}
+}
+    private Address rsAddress(ResultSet rs) throws SQLException {
+        return new Address(rs.getLong("id"),
+                rs.getString("STREETNAME"),
+                rs.getInt("STREETNUMBER"),
+                rs.getInt("ZIPCODE"),
+                rs.getString("CITY"));
+    }
+
+    public int saveEmployeeCreateRide(Employee employee, long addressId) {
+        int id = 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO EMPLOYEE(FIRSTNAME, LASTNAME,ADDRESS_ID) VALUES " +
+                     " (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, employee.getFirstName());
+            ps.setString(2, employee.getLastName());
+            ps.setLong(3, addressId);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys(); //hämta id som skapas automatiskt av databasen
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+}
+    public int saveAddress(Address address) {
+        int id = 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO ADDRESS(STREETNAME, STREETNUMBER,ZIPCODE,CITY) VALUES " +
+                     " (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, address.getStreetName());
+            ps.setInt(2, address.getStreetNumber());
+            ps.setInt(3, address.getZipCode());
+            ps.setString(4, address.getCity());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys(); //hämta id som skapas automatiskt av databasen
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    public int saveVehicle (Vehicle vehicle, long addressId) {
+        int id = 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Vehicle(EMPLOYEE_ID, NUMOFSEATS, COSTPERMILE, LICENSEPLATE, MODEL) VALUES " +
+                     " (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, addressId);
+            ps.setInt(2, vehicle.getSeats());
+            ps.setDouble(3, vehicle.getCostPerMile());
+            ps.setString(4, vehicle.getLicensePlate());
+            ps.setString(5, vehicle.getModel());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys(); //hämta id som skapas automatiskt av databasen
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    public void saveRide(CarRide carride, long vehicleId, long employeeId) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO CARRIDE(VEHICLE_ID, RIDEDATE, EMPLOYEE_ID, AVAILABLESEATS) VALUES " +
+                     " (?, ?, ?, ?)")) {
+            ps.setLong(1, vehicleId);
+            ps.setDate(2, (Date) carride.getDate());
+            ps.setLong(3, employeeId);
+            ps.setInt(4, carride.getAvailableSeats());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

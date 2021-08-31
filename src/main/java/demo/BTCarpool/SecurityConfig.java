@@ -18,12 +18,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/{id}").permitAll()
+                .antMatchers("/", "/{id}", "/h2", "/h2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").defaultSuccessUrl("/", true)
                 .permitAll();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
     @Bean
     public UserDetailsService userDetailsService() {

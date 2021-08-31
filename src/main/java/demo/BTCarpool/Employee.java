@@ -4,19 +4,20 @@ import javax.validation.constraints.Size;
 
 public class Employee {
     private long id;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private String firstName;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private String lastName;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private Boolean hasCar = false;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private int addressId;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private String userName;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
 
-    public Employee(long id, @Size(min = 1, max = 100) String firstName, @Size(min = 1, max = 100) String lastName, @Size(min = 1, max = 100) Boolean hasCar, @Size(min = 1, max = 100) int addressId, @Size(min = 1, max = 100) String userName) {
+
+    public Employee(long id, String firstName, String lastName, Boolean hasCar, int addressId, String userName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

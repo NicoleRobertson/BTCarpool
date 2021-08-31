@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Item - Blocket Light</title>
+    <title>Create a Ride - Business Tech Carpool</title>
 
     <!--Required meta tags -->
     <meta charset="utf-8">
@@ -12,6 +12,10 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../static/css/style.css" th:href="'css/style.css'">
+    <!--Bootstrap calendar-->
+    <link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
 
 </head>
 
@@ -20,7 +24,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Blocket Light</a>
+        <a class="navbar-brand" href="/">Business Tech Carpool</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,17 +32,15 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/listItems">All Bikes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/addItem">Add Bikes</a>
+                    <a class="nav-link" href="addItem">Create new ride
+                        <span class="sr-only">(current)</span>
+                    </a>
                 </li>
                 <li th:if="${#httpServletRequest.remoteUser} == null" class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="login">Login</a>
                 </li>
                 <li th:if="${#httpServletRequest.remoteUser} != null" class="nav-item">
                     <form th:action="@{/logout}" method="post">
@@ -48,7 +50,6 @@
             </ul>
         </div>
     </div>
-
 </nav>
 
 <!-- Header -->
@@ -58,7 +59,7 @@
             <div class="col-lg-12">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h1 class="display-4 text-primary">Add Bike</h1>
+                        <h1 class="display-4 text-primary">Create a Ride</h1>
                     </div>
                 </div>
             </div>
@@ -66,66 +67,118 @@
     </div>
 </header>
 
-
-<!-- Page Content -->
-
-<div th:if="${#httpServletRequest.remoteUser} == null" class="container"><h1 class="display-6">Please login to add bike</h1></div>
-
-<div th:if="${#httpServletRequest.remoteUser} != null" class="container">
-
-    <p th:if="${errorMsg != null}" th:text="${errorMsg}"></p>
-
-    <form th:action="@{/addItem}" th:object="${item}" method="POST">
-        <div class="form-group">
-            <label class="my-1 mr-2 col-sm-2 col-form-label col-form-label-lg" for="inlineFormCustomSelectPref">Category</label>
-
-            <p th:if="${#fields.hasErrors('category')}"></p>
-            <select class="custom-select my-1 mr-sm-2" th:field="*{category}" id="inlineFormCustomSelectPref" placeholder="Choose a category" th:errorclass="error">
-
-                <option th:each="category : ${T(com.blocketlight.BlocketLight.Category).values()}"
-                        th:value="${category}" th:text="${category.displayValue}" ></option>
+<!--Create a Ride Form-->
+<form action="/save" method="POST">
+    <h3>From Address</h3>
+    <div class="form-row" th:object="${address}">
+        <div class="form-group col-md-6">
+            <label for="streetName">Street Name</label>
+            <input type="text" class="form-control" id="streetName" th:field="*{streetName}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="streetNumber">Street Number</label>
+            <input type="text" class="form-control" id="streetNumber" th:field="*{streetNumber}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="zipCode">Zip Code</label>
+            <input type="text" class="form-control" id="zipCode" th:field="*{zipCode}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" th:field="*{city}">
+        </div>
+    </div>
+    <!--<h3>To Office</h3>
+    <div class="form-row" th:object="${office}">
+        <div class="form-group col-md-6">
+            <select th:field="*{name}">
+                <option th:field="*{cuisine}" th:value = "ITALIAN">ITALIAN</option>
+                <option th:field="*{cuisine}" th:value = "FRENCH">FRENCH</option>
+                <option th:field="*{cuisine}" th:value = "ASIAN">ASIAN</option>
+                <option th:field="*{cuisine}" th:value = "AMERICAN">AMERICAN</option>
+                <option th:field="*{cuisine}" th:value = "MEXICAN">MEXICAN</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">Description</label>
-            <p th:if="${#fields.hasErrors('description')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Description can not be empty!" th:field="*{description}" th:errorclass="error" ></p>
-            <p th:if="!${#fields.hasErrors('description')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput2a" placeholder="Description" th:field="*{description}" ></p>
+    </div>-->
+    <h3>Driver Details</h3>
+    <div class="form-row" th:object="${employee}">
+        <div class="form-group col-md-6">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
         </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">Build year</label>
-            <p th:if="${#fields.hasErrors('buildYear')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Build year can not be empty!" th:field="*{buildYear}" th:errorclass="error" ></p>
-            <p th:if="!${#fields.hasErrors('buildYear')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput3a" placeholder="Build year" th:field="*{buildYear}" ></p>
+        <div class="form-group col-md-6">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastname" th:field="*{lastName}">
+        </div>
+    </div>
+    <h3>Your vehicle Details</h3>
+    <div class="form-row" th:object="${vehicle}">
+        <div class="form-group col-md-6">
+            <label for="seats">Number of seats</label>
+            <input type="text" class="form-control" id="seats" th:field="*{seats}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="costPerMile">Cost per mile</label>
+            <input type="text" class="form-control" id="costPerMile" th:field="*{costPerMile}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="licensePlate">License plate</label>
+            <input type="text" class="form-control" id="licensePlate" th:field="*{licensePlate}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="model">Car model</label>
+            <input type="text" class="form-control" id="model" th:field="*{model}">
+        </div>
+    </div>
+    <div class="form-row" th:object="${ride}">
+        <div class="form-group col-md-6">
+            <div class="form-group">
+                <label for="date">Date for the car ride</label>
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                           th:field="*{date}" id="date" placeholder="Date"/>
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="available">Available seats for this car ride</label>
+            <input type="text" class="form-control" id="available" th:field="*{availableSeats}">
+        </div>
+    </div>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/moment/moment.min.js}"></script>
+    <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+    <script>
+    $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+        icons: {
+            time: 'far fa-clock',
+            date: 'far fa-calendar',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check-o',
+            clear: 'far fa-trash',
+            close: 'far fa-times'
+        } });
 
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">Price</label>
-            <p th:if="${#fields.hasErrors('price')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Price can not be empty!" th:field="*{price}" th:errorclass="error" ></p>
-            <p th:if="!${#fields.hasErrors('price')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput4a" placeholder="Price" th:field="*{price}" ></p>
+    $('#datetimepicker1').datetimepicker({
+        format: 'DD/MM/YYYY h:mm A'
+    });
+    </script>
 
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">Image URL</label>
-            <p th:if="${#fields.hasErrors('imageURL')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Image URL can not be empty!" th:field="*{imageURL}" th:errorclass="error" ></p>
-            <p th:if="!${#fields.hasErrors('imageURL')}" >
-                <input type="text" class="form-control" id="formGroupExampleInput5a" placeholder="Image URL" th:field="*{imageURL}" ></p>
+    <button type="submit" class="btn btn-primary">Save your Car ride</button>
+</form>
 
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
-<!-- /.container -->
-<p> </p>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Mini Project-2 Blocket Light 2021</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Business Tech Carpool Cohort 3</p>
     </div>
     <!-- /.container -->
 </footer>

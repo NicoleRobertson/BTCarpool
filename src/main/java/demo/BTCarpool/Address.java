@@ -5,17 +5,18 @@ import javax.validation.constraints.Size;
 public class Address {
 
     private long id;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private String streetName;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private int streetNumber;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
     private int zipCode;
-    @Size(min=1, max=5)
+    //@Size(min=1, max=5)
     private String city;
-    @Size(min=1, max=100)
+    //@Size(min=1, max=100)
 
-    public Address(long id, @Size(min = 1, max = 100) String streetName, @Size(min = 1, max = 100) int streetNumber, @Size(min = 1, max = 100) int zipCode, @Size(min = 1, max = 5) String city) {
+
+    public Address(long id, String streetName, int streetNumber, int zipCode, String city) {
         this.id = id;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
