@@ -208,7 +208,10 @@ public class CarRideRepository {
              PreparedStatement ps = conn.prepareStatement("INSERT INTO CARRIDE(VEHICLE_ID, RIDEDATE, EMPLOYEE_ID, AVAILABLESEATS) VALUES " +
                      " (?, ?, ?, ?)")) {
             ps.setLong(1, vehicleId);
-            ps.setDate(2, (Date) carride.getDate());
+            System.out.println(carride.getDate());
+            if (carride.getDate() != null){
+                ps.setDate(2,new java.sql.Date(carride.getDate().getTime()));}
+            else {ps.setDate (2, null);}
             ps.setLong(3, employeeId);
             ps.setInt(4, carride.getAvailableSeats());
             ps.executeUpdate();

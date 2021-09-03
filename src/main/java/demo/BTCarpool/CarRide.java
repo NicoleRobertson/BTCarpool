@@ -1,13 +1,23 @@
 package demo.BTCarpool;
 
-import javax.validation.constraints.Size;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
 
 public class CarRide {
     private long id;
     //@Size(min=1, max=100)
     private long vehicleId;
     //@Size(min=1, max=100)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     //@Size(min=1, max=100)
     private long employeeId;
@@ -27,7 +37,7 @@ public class CarRide {
         this.availableSeats = availableSeats;
     }
 
-    public CarRide() {}
+    //public CarRide() {}
 
     public long getId() {
         return id;

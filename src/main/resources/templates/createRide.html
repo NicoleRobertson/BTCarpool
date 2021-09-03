@@ -13,13 +13,15 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../static/css/style.css" th:href="'css/style.css'">
     <!--Bootstrap calendar-->
-    <link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/datepicker.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
-
 </head>
 
 <body>
+
+<p style = "margin: 15px">
+</p>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -68,7 +70,7 @@
 </header>
 
 <!--Create a Ride Form-->
-<form action="/save" method="POST">
+<form action="/save" method="POST" >
     <h3>From Address</h3>
     <div class="form-row" th:object="${address}">
         <div class="form-group col-md-6">
@@ -131,15 +133,14 @@
         </div>
     </div>
     <div class="form-row" th:object="${ride}">
-        <div class="form-group col-md-6">
-            <div class="form-group">
-                <label for="date">Date for the car ride</label>
-                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                           th:field="*{date}" id="date" placeholder="Date"/>
-                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                    </div>
+       <div class="form-group">
+            <label for="date">Ride date:</label>
+            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                       th:field="*{date}" id="date" placeholder="Date"/>
+                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                    <!--<button style='font-size:24px'> <i class='fas fa-calendar-alt'></i></button>-->
+                    <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                 </div>
             </div>
         </div>
@@ -152,7 +153,8 @@
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/assets/moment/moment.min.js}"></script>
-    <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+    <script th:src="@{/js/datepicker.js}"></script>
+
     <script>
     $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
         icons: {
@@ -168,9 +170,9 @@
         } });
 
     $('#datetimepicker1').datetimepicker({
-        format: 'DD/MM/YYYY h:mm A'
+        format: 'YYYY-MM-DD'
     });
-    </script>
+</script>
 
     <button type="submit" class="btn btn-primary">Save your Car ride</button>
 </form>

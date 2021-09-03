@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
 
 
 import javax.validation.Valid;
@@ -24,9 +22,6 @@ public class BtCarpoolController {
 
     @Autowired
     CarRideRepository repository;
-
-    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
-    private Date date;
 
 
     @GetMapping ("/")
