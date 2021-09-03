@@ -38,13 +38,14 @@ public class BtCarpoolController {
         Vehicle details = repository.getVehicle(id);
         /*Employee employee = repository.getEmployee(id);*/
         model.addAttribute("details", details);
+        model.addAttribute("image", "'/panoramanature.jpg'");
         /*model.addAttribute("employee", employee);*/
         return "carridedetails";
     }
 
     @GetMapping("/login")
-    public String login() {
-
+    public String login(Model model) {
+        model.addAttribute("image", "'/panoramanature.jpg'");
         return "login";
     }
 
@@ -54,6 +55,7 @@ public class BtCarpoolController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("vehicle", new Vehicle());
         model.addAttribute("ride", new CarRide());
+        model.addAttribute("image", "'/panoramanature.jpg'");
         return "createRide";
     }
 

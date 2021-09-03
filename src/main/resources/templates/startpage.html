@@ -98,6 +98,7 @@
             <th scope="col">Pickup zone</th>
             <th scope="col">Driver</th>
             <th scope="col">Available Seats</th>
+            <th scope="col">Join this Ride</th>
         </tr>
         </thead>
         <tbody id="myTable">
@@ -107,6 +108,7 @@
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
+            <td><button type="button" style="background-color: #C8C8B4;">Join!</button></td>
         </tr>
         </tbody>
     </table>
