@@ -28,11 +28,12 @@ public class BtCarpoolController {
     public String startpage(Model model) {
         List<StartpageCarRides> list = repository.publishedCarRides();
         model.addAttribute("publishedCarRides", list);
+        model.addAttribute("image", "'/panoramanature.jpg'");
 
         return "startpage";
     }
 
-   @GetMapping("/{id}")
+   @GetMapping("/carrides/{id}")
     public String details(Model model, @PathVariable int id) {
         Vehicle details = repository.getVehicle(id);
         /*Employee employee = repository.getEmployee(id);*/
