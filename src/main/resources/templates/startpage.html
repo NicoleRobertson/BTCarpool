@@ -64,12 +64,12 @@
         <div class="row h-100 align-center">
             <div class="col-sm-12" style="opacity:0,8">
 
-                <div class="card border-0" style="width: 40rem; margin: 0 auto; background-color:transparent; outline: none;">
+                <div class="card border-0" style="width: 40rem; margin: 0 auto; background-color: rgba(0, 0, 0, 0.5); outline: none;" >
 
-                    <div class="card-body">
-                       <h3 class="card-title">NEED A RIDE?</h3>
+                    <div class="card-body" >
+                       <h3 class="card-title" style="color: white;">NEED A RIDE?</h3>
 
-                        <p class="card-text" style="font-size:20px">
+                        <p class="card-text" style="font-size:20px; color: white;  ">
                             <br>We have all heard it:
                             <b>sharing is caring!</b>
                             <br>
@@ -108,7 +108,14 @@
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
-            <td><button type="button" style="background-color: #C8C8B4;">Join!</button></td>
+            <td><button type="button" id="button" >Join!</button></td>
+            <style>
+                #button{
+                background-color: #C8C8B4;
+                border-radius:2em;
+                button:hover{border-color:#4CAF50}
+                }
+            </style>
         </tr>
         </tbody>
     </table>
