@@ -220,4 +220,64 @@ public class CarRideRepository {
             e.printStackTrace();
         }
     }
+
+    public int saveBooking (long carRideId, long employeeId) {
+        int id = 0;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Booking(EMPLOYEE_ID, CARRIDE_ID, ACTIVE) VALUES " +
+                     " (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, employeeId);
+            ps.setLong(2, carRideId);
+            ps.setBoolean(3, true);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys(); //hämta id som skapas automatiskt av databasen
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    //Find Employee where UserName = currentUserName (login)
+    public Employee getEmployee(String currentUserName) {
+        Employee employee = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * from Employee where Employee.USERNAME = " + "'" + currentUserName + "'")) {
+
+            if (rs.next()) {
+                employee = rsEmployee(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
+    }
+
+    public CarRide getCarRide(long id) {
+        CarRide carRide = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ) {
+
+             String sql = "UPDATE CARRIDE SET CARRIDE.AVAILABLESEATS = (CARRIDE.AVAILABLESEATS - 1) WHERE CARRIDE.ID = ";
+
+             stmt.executeUpdate(sql + id);
+             ResultSet rs = stmt.executeQuery("SELECT * FROM CARRIDE WHERE CARRIDE.ID = " + id);
+
+            if (rs.next()) {
+                carRide = rsCarRide(rs);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return carRide;
+    }
+
 }

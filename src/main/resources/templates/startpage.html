@@ -108,14 +108,22 @@
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
-            <td><button type="button" id="button" >Join!</button></td>
+            <td><a th:href="'/join/' + ${CarRide.id}"  id="click" class="btn btn-outline-success" th:if="${userName != null}" th:text="'Join!'" />
+	            <span th:if="${userName == null}">
+	            Log in to Join this ride.
+            </span>
+            </td>
+            </td>
+	        
             <style>
                 #button{
                 background-color: #C8C8B4;
                 border-radius:2em;
                 button:hover{border-color:#4CAF50}
                 }
+       
             </style>
+	        
         </tr>
         </tbody>
     </table>

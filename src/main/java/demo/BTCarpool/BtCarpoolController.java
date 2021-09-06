@@ -1,15 +1,16 @@
 package demo.BTCarpool;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +31,37 @@ public class BtCarpoolController {
         model.addAttribute("publishedCarRides", list);
         model.addAttribute("image", "'/panoramanature.jpg'");
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            model.addAttribute("userName", currentUserName);
+           // return currentUserName;
+        }
+
         return "startpage";
+    }
+
+    @GetMapping ("/join/{id}")
+    public String join(Model model, @PathVariable int id) {
+        //Find username based on authetication
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        System.out.println(currentUserName);
+
+        //Find employeeId based on UserName
+        Employee employee = repository.getEmployee(currentUserName);
+        //Create a row in table named Booking
+        int bookingId = repository.saveBooking(id, employee.getId());
+        //Find carride Id in repository
+        repository.getCarRide(id);
+
+        //Update list of published cars (availableseats-1)
+        List<StartpageCarRides> list = repository.publishedCarRides();
+        model.addAttribute("publishedCarRides", list);
+
+        return "redirect:/";
+
     }
 
    @GetMapping("/carrides/{id}")
@@ -70,4 +101,5 @@ public class BtCarpoolController {
         repository.saveRide(carride, vehicleId, employeeId);
         return "redirect:/create";
     }
+
 }
