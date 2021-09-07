@@ -1,16 +1,14 @@
 package demo.BTCarpool;
 
-import javax.validation.constraints.Size;
-
 public class Address {
 
     private long id;
     //@Size(min=1, max=100)
     private String streetName;
     //@Size(min=1, max=100)
-    private int streetNumber;
+    private Integer streetNumber;
     //@Size(min=1, max=100)
-    private int zipCode;
+    private Integer zipCode;
     //@Size(min=1, max=5)
     private String city;
     //@Size(min=1, max=100)
@@ -42,7 +40,7 @@ public class Address {
         this.streetName = streetName;
     }
 
-    public int getStreetNumber() {
+    public Integer getStreetNumber() {
         return streetNumber;
     }
 
@@ -50,7 +48,7 @@ public class Address {
         this.streetNumber = streetNumber;
     }
 
-    public int getZipCode() {
+    public Integer getZipCode() {
         return zipCode;
     }
 

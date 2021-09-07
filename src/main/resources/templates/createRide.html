@@ -55,13 +55,13 @@
 </nav>
 
 <!-- Header -->
-<header class="bg-primary py-5 mb-5bg-image" style="background-image: url('../static/panoramanature.jpg'); height: 55vh; background-repeat: no-repeat; background-size: 100% 100%;" th:style="'background-image: url(' + ${image} + '); height: 55vh; background-repeat: no-repeat; background-size: 100% 100%;'" >
+<header class="bg-primary py-5 mb-5bg-image" style="background-image: url('../static/flowers.jpg'); height: 55vh; background-repeat: no-repeat; background-size: 100% 100%;" th:style="'background-image: url(' + ${image} + '); height: 55vh; background-repeat: no-repeat; background-size: 100% 100%;'" >
     <div class="container h-100">
         <div class="row h-100 align-items-center">
             <div class="col-lg-12">
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 23rem; margin: 0 auto; background-color: rgba(0, 0, 0, 0.5); outline: none;">
                     <div class="card-body">
-                        <h1 class="display-4 text-primary">Create a Ride</h1>
+                        <h1 class="display-4 text-white" style="text-color: white;">Create a Ride</h1>
                     </div>
                 </div>
             </div>
@@ -69,85 +69,93 @@
     </div>
 </header>
 
+<!--Create a border around the form to change background color-->
+<div class="from-container" style="background-color: rgb(229, 228, 226); margin-left: 60px; margin-right: 60px">
+
 <!--Create a Ride Form-->
+<div class="form-body" style="margin: 40px 350px 40px 350px;">
 <form action="/save" method="POST" >
-    <h3>From Address</h3>
+    <h5 style="text-align:center"><br>Where are you driving from?</h5>
     <div class="form-row" th:object="${address}">
         <div class="form-group col-md-6">
-            <label for="streetName">Street Name</label>
-            <input type="text" class="form-control" id="streetName" th:field="*{streetName}">
+            <!--<label for="streetName">Street Name</label>-->
+            <input type="text" placeholder="Street Name (ex Pontonjärgatan)" class="form-control" id="streetName" th:field="*{streetName}">
         </div>
         <div class="form-group col-md-6">
-            <label for="streetNumber">Street Number</label>
-            <input type="text" class="form-control" id="streetNumber" th:field="*{streetNumber}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="zipCode">Zip Code</label>
-            <input type="text" class="form-control" id="zipCode" th:field="*{zipCode}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" th:field="*{city}">
-        </div>
-    </div>
-    <!--<h3>To Office</h3>
-    <div class="form-row" th:object="${office}">
-        <div class="form-group col-md-6">
-            <select th:field="*{name}">
-                <option th:field="*{cuisine}" th:value = "ITALIAN">ITALIAN</option>
-                <option th:field="*{cuisine}" th:value = "FRENCH">FRENCH</option>
-                <option th:field="*{cuisine}" th:value = "ASIAN">ASIAN</option>
-                <option th:field="*{cuisine}" th:value = "AMERICAN">AMERICAN</option>
-                <option th:field="*{cuisine}" th:value = "MEXICAN">MEXICAN</option>
-            </select>
-        </div>
-    </div>-->
-    <h3>Driver Details</h3>
+	        <!-- <label for="streetNumber">Street Number</label> -->
+			 <input type="text" placeholder="Street Number (ex 35)" class="form-control" id="streetNumber" th:field="*{streetNumber}">
+		 </div>
+		 <div class="form-group col-md-6">
+			 <!-- <label for="zipCode">Zip Code</label> -->
+			  <input type="text" placeholder="Zip Code (ex 11237)" class="form-control" id="zipCode" th:field="*{zipCode}">
+		  </div>
+		  <div class="form-group col-md-6">
+			  <!--  <label for="city">City</label> -->
+				<input type="text" placeholder="City (ex Stockholm)" class="form-control" id="city" th:field="*{city}">
+			</div>
+		</div>
+	
+		<!--<h3>To Office</h3>
+		<div class="form-row" th:object="${office}">
+			<div class="form-group col-md-6">
+				<select th:field="*{name}">
+					<option th:field="*{cuisine}" th:value = "ITALIAN">ITALIAN</option>
+					<option th:field="*{cuisine}" th:value = "FRENCH">FRENCH</option>
+					<option th:field="*{cuisine}" th:value = "ASIAN">ASIAN</option>
+					<option th:field="*{cuisine}" th:value = "AMERICAN">AMERICAN</option>
+					<option th:field="*{cuisine}" th:value = "MEXICAN">MEXICAN</option>
+				</select>
+			</div>
+		</div>-->
+    <h5 style="text-align:center">Who is driving?</h5>
     <div class="form-row" th:object="${employee}">
         <div class="form-group col-md-6">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastname" th:field="*{lastName}">
-        </div>
-    </div>
-    <h3>Your vehicle Details</h3>
-    <div class="form-row" th:object="${vehicle}">
-        <div class="form-group col-md-6">
-            <label for="seats">Number of seats</label>
-            <input type="text" class="form-control" id="seats" th:field="*{seats}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="costPerMile">Cost per mile</label>
-            <input type="text" class="form-control" id="costPerMile" th:field="*{costPerMile}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="licensePlate">License plate</label>
-            <input type="text" class="form-control" id="licensePlate" th:field="*{licensePlate}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="model">Car model</label>
-            <input type="text" class="form-control" id="model" th:field="*{model}">
-        </div>
-    </div>
-    <div class="form-row" th:object="${ride}">
-       <div class="form-group">
-            <label for="date">Ride date:</label>
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                       th:field="*{date}" id="date" placeholder="Date"/>
-                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                    <!--<button style='font-size:24px'> <i class='fas fa-calendar-alt'></i></button>-->
+	        <!--  <label for="firstName">First Name</label> -->
+			  <input type="text" placeholder="First Name (ex Anders)" class="form-control" id="firstName" th:field="*{firstName}">
+		  </div>
+		  <div class="form-group col-md-6">
+			  <!--  <label for="lastName">Last Name</label> -->
+				<input type="text" placeholder="Last Name (ex Andersson)" class="form-control" id="lastname" th:field="*{lastName}">
+			</div>
+		</div>
+		<h5 style="text-align:center">Details of vehicle</h5>
+		<div class="form-row" th:object="${vehicle}">
+			<div class="form-group col-md-6">
+				<!--  <label for="seats">Number of seats</label> -->
+			   <input type="text" placeholder="Number of Seats (ex 3)" class="form-control" id="seats" th:field="*{seats}">
+		   </div>
+		   <div class="form-group col-md-6">
+			   <!-- <label for="costPerMile">Cost per mile</label> -->
+				<input type="text" placeholder="Cost per Mile (ex 39.0)" class="form-control" id="costPerMile" th:field="*{costPerMile}">
+			</div>
+			<div class="form-group col-md-6">
+				<!-- <label for="licensePlate">License plate</label> -->
+				<input type="text" placeholder="License Plate (ex ABM123)" class="form-control" id="licensePlate" th:field="*{licensePlate}">
+			</div>
+			<div class="form-group col-md-6">
+				<!-- <label for="model">Car model</label> -->
+				<input type="text" placeholder="Car Model (ex Volvo)" class="form-control" id="model" th:field="*{model}">
+			</div>
+		</div>
+		<h5 style="text-align:center">Details for this ride</h5>
+    <div class="master-div" style="margin-left: 300px; margin-right: 100px">
+		<div class="form-row" th:object="${ride}">
+		   <div class="form-group">
+				<label for="date">Date:</label>
+				<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+					<input type="text" placeholder="yyyy-mm-dd" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+						   th:field="*{date}" id="date"/>
+					<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+						<!--<button style='font-size:24px'> <i class='fas fa-calendar-alt'></i></button>-->
                     <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="available">Available seats for this car ride</label>
+        <div class="form-group col-md-4">
+            <label for="available">Available Seats</label>
             <input type="text" class="form-control" id="available" th:field="*{availableSeats}">
         </div>
+    </div>
     </div>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -173,9 +181,13 @@
         format: 'YYYY-MM-DD'
     });
 </script>
-
-    <button type="submit" class="btn btn-primary">Save your Car ride</button>
+<div class ="col-md-12 text-center">
+    <button type="submit" class="btn btn-secondary" style="text-align: center;">Save this car ride</button>
+</div>
 </form>
+	<br>
+</div>
+</div>
 
 <!-- Footer -->
 <footer class="py-5" style="background-color:#C8C8B4">
@@ -184,6 +196,8 @@
     </div>
     <!-- /.container -->
 </footer>
+<br>
+<br>
 
 
 
