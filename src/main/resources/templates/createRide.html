@@ -70,10 +70,10 @@
 </header>
 
 <!--Create a border around the form to change background color-->
-<div class="from-container" style="background-color: rgb(229, 228, 226); margin-left: 60px; marigin-right: 60px">
+<div class="from-container" style="background-color: rgb(229, 228, 226); margin-left: 60px; margin-right: 60px">
 
 <!--Create a Ride Form-->
-<div class="form-body" style="margin: 40px 350px 40px 350px; font-family:sans-serif">
+<div class="form-body" style="margin: 40px 350px 40px 350px;">
 <form action="/save" method="POST" >
     <h5 style="text-align:center"><br>Where are you driving from?</h5>
     <div class="form-row" th:object="${address}">
@@ -138,22 +138,24 @@
 			</div>
 		</div>
 		<h5 style="text-align:center">Details for this ride</h5>
+    <div class="master-div" style="margin-left: 300px; margin-right: 100px">
 		<div class="form-row" th:object="${ride}">
 		   <div class="form-group">
 				<label for="date">Date:</label>
 				<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
 					<input type="text" placeholder="yyyy-mm-dd" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-						   th:field="*{date}" id="date" placeholder="Date"/>
+						   th:field="*{date}" id="date"/>
 					<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
 						<!--<button style='font-size:24px'> <i class='fas fa-calendar-alt'></i></button>-->
                     <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="available">Available Seats</label>
             <input type="text" class="form-control" id="available" th:field="*{availableSeats}">
         </div>
+    </div>
     </div>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -179,8 +181,8 @@
         format: 'YYYY-MM-DD'
     });
 </script>
-<div style="margin: 0">
-    <button type="submit" class="btn btn-primary" style="text-align: center;">Save this car ride</button>
+<div class ="col-md-12 text-center">
+    <button type="submit" class="btn btn-secondary" style="text-align: center;">Save this car ride</button>
 </div>
 </form>
 	<br>

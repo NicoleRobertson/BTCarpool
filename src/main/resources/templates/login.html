@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/createRide">Create new ride</a>
+                    <a class="nav-link" href="/create">Create new ride</a>
                 </li>
                 <li th:if="${#httpServletRequest.remoteUser} == null" class="nav-item">
                     <a class="nav-link" href="/login">Login
@@ -65,15 +65,18 @@
 
 
 <!-- Page Content -->
-<div class="container">
+
+<div class="container" style="background-color: rgb(229, 228, 226); width:500px">
+
+    <div class="form-container" style="margin: 40px 35px 40px 35px;">
 
     <!--Login-->
 
-    <form th:action="@{/login}" method="post">
+
+    <form th:action="@{/login}" method="post" style="margin: 0 auto">
         <div class="mb-3">
             <label for="username" class="form-label col-sm-2 col-form-label col-form-label-lg">Username</label>
             <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
         </div>
         <div class="mb-3">
             <label for="InputPassword1" class="form-label col-sm-2 col-form-label col-form-label-lg">Password</label>
@@ -85,12 +88,16 @@
             <p style="color:red;">Invalid username or password.</p>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Sign up!</button>
+        <br>
     </form>
-
+    </div>
     <!-- /.row -->
     <p> </p>
 </div>
+
 <!-- /.container -->
 
 <!-- Footer -->
@@ -100,6 +107,8 @@
     </div>
     <!-- /.container -->
 </footer>
+<br>
+<br>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
