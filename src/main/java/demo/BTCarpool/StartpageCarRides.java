@@ -15,7 +15,7 @@ public class StartpageCarRides {
     @Size(min=1, max=100)
     private String employeeName;
     @Size(min=1, max=100)
-    private int availableSeats;
+    private Integer availableSeats;
     @Size(min=1, max=100)
     private boolean alreadyBooked = false;
 
@@ -72,11 +72,11 @@ public class StartpageCarRides {
         this.employeeName = employeeName;
     }
 
-    public int getAvailableSeats() {
+    public Integer getAvailableSeats() {
         return availableSeats;
     }
 
-    public void setAvailableSeats(int availableSeats) {
+    public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
     }
 

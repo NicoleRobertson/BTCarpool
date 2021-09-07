@@ -7,7 +7,7 @@ public class Vehicle {
     @Size(min=1, max=100)
     private long employeeId;
     @Size(min=1, max=100)
-    private int seats;
+    private Integer seats;
     @Size(min=1, max=100)
     private Double costPerMile;
     @Size(min=1, max=100)
@@ -44,7 +44,7 @@ public class Vehicle {
         this.employeeId = employeeId;
     }
 
-    public int getSeats() {
+    public Integer getSeats() {
         return seats;
     }
 

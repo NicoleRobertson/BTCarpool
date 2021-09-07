@@ -20,7 +20,7 @@ public class CarRide {
     //@Size(min=1, max=100)
     private long officeId;
     //@Size(min=1, max=100)
-    private int availableSeats;
+    private Integer availableSeats;
     //@Size(min=1, max=100)
     private boolean alreadyBooked = false;
 
@@ -79,7 +79,7 @@ public class CarRide {
         this.officeId = officeId;
     }
 
-    public int getAvailableSeats() {
+    public Integer getAvailableSeats() {
         return availableSeats;
     }
 
