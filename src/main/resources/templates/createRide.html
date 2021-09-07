@@ -69,10 +69,13 @@
     </div>
 </header>
 
+<!--Create a border around the form to change background color-->
+<div class="from-container" style="background-color: rgb(229, 228, 226); margin-left: 60px; marigin-right: 60px">
+
 <!--Create a Ride Form-->
-<div class="formcontainer" style="margin: 30px 500px 30px 500px; font-family:sans-serif">
+<div class="form-body" style="margin: 40px 350px 40px 350px; font-family:sans-serif">
 <form action="/save" method="POST" >
-    <h4 style="text-align:center">Where are you driving from?</h4>
+    <h5 style="text-align:center"><br>Where are you driving from?</h5>
     <div class="form-row" th:object="${address}">
         <div class="form-group col-md-6">
             <!--<label for="streetName">Street Name</label>-->
@@ -104,7 +107,7 @@
 				</select>
 			</div>
 		</div>-->
-    <h4 style="text-align:center">Who is driving?</h4>
+    <h5 style="text-align:center">Who is driving?</h5>
     <div class="form-row" th:object="${employee}">
         <div class="form-group col-md-6">
 	        <!--  <label for="firstName">First Name</label> -->
@@ -115,7 +118,7 @@
 				<input type="text" placeholder="Last Name (ex Andersson)" class="form-control" id="lastname" th:field="*{lastName}">
 			</div>
 		</div>
-		<h4 style="text-align:center">Details of vehicle</h4>
+		<h5 style="text-align:center">Details of vehicle</h5>
 		<div class="form-row" th:object="${vehicle}">
 			<div class="form-group col-md-6">
 				<!--  <label for="seats">Number of seats</label> -->
@@ -134,7 +137,7 @@
 				<input type="text" placeholder="Car Model (ex Volvo)" class="form-control" id="model" th:field="*{model}">
 			</div>
 		</div>
-		<h4 style="text-align:center">Details for this ride</h4>
+		<h5 style="text-align:center">Details for this ride</h5>
 		<div class="form-row" th:object="${ride}">
 		   <div class="form-group">
 				<label for="date">Date:</label>
@@ -176,9 +179,12 @@
         format: 'YYYY-MM-DD'
     });
 </script>
-
-    <button type="submit" class="btn btn-primary">Save your Car ride</button>
+<div style="margin: 0">
+    <button type="submit" class="btn btn-primary" style="text-align: center;">Save this car ride</button>
+</div>
 </form>
+	<br>
+</div>
 </div>
 
 <!-- Footer -->
@@ -188,6 +194,8 @@
     </div>
     <!-- /.container -->
 </footer>
+<br>
+<br>
 
 
 
