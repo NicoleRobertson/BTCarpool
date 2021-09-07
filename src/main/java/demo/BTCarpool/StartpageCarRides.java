@@ -17,6 +17,7 @@ public class StartpageCarRides {
     @Size(min=1, max=100)
     private int availableSeats;
     @Size(min=1, max=100)
+    private boolean alreadyBooked = false;
 
     public StartpageCarRides(long id, @Size(min = 1, max = 100) Date date, @Size(min = 1, max = 100) String officeName, @Size(min = 1, max = 100) int zipCode, @Size(min = 1, max = 100) String employeeName, @Size(min = 1, max = 100) int availableSeats) {
         this.id = id;
@@ -77,5 +78,13 @@ public class StartpageCarRides {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public boolean isAlreadyBooked() {
+        return alreadyBooked;
+    }
+
+    public void setAlreadyBooked(boolean alreadyBooked) {
+        this.alreadyBooked = alreadyBooked;
     }
 }

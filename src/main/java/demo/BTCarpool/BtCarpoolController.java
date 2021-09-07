@@ -28,6 +28,8 @@ public class BtCarpoolController {
     @GetMapping ("/")
     public String startpage(Model model) {
         List<StartpageCarRides> list = repository.publishedCarRides();
+        List<CarRide> carRides = repository.getCarRides();
+        List<Booking> bookings = repository.getBookings();
         model.addAttribute("publishedCarRides", list);
         model.addAttribute("image", "'/panoramanature.jpg'");
 
@@ -36,13 +38,27 @@ public class BtCarpoolController {
             String currentUserName = authentication.getName();
             model.addAttribute("userName", currentUserName);
             Employee employee = repository.getEmployee(currentUserName);
-            if (employee!=null){
-                model.addAttribute("employeeId", employee.getId());}
-           // return currentUserName;
+            if (employee != null) {
+                model.addAttribute("employeeId", employee.getId());
+            }
+            // return currentUserName;
+            for (StartpageCarRides c : list) {
+                for (Booking b : bookings) {
+                    if (c.getId() == b.getCarrideId() && employee.getId() == b.getEmployeeId()) {
+                        c.setAlreadyBooked(true);
+                    }
+                }
+            }
+
+            /*CarRideId.Booking == CarrideId.Carride (alla bokningar för specifik carride - kan vara fler)
+             * (EmployeeId.Booking == EmployeeId.Carride) && (Username.Login == Username.Employee) */
+
+            model.addAttribute("bookings", repository.getBookings());
+
         }
-        model.addAttribute("bookings", repository.getBookings());
 
         return "startpage";
+
     }
 
     @GetMapping ("/join/{id}")

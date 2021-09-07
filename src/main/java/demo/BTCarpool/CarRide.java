@@ -8,9 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
-@Getter
-@NoArgsConstructor
+//@Setter
+//@Getter
+//@NoArgsConstructor
 
 public class CarRide {
     private long id;
@@ -26,6 +26,8 @@ public class CarRide {
     //@Size(min=1, max=100)
     private int availableSeats;
     //@Size(min=1, max=100)
+    private boolean alreadyBooked = false;
+
 
 
     public CarRide(long id, long vehicleId, Date date, long employeeId, long officeId, int availableSeats) {
@@ -37,7 +39,9 @@ public class CarRide {
         this.availableSeats = availableSeats;
     }
 
-    //public CarRide() {}
+    public CarRide() {
+    }
+
 
     public long getId() {
         return id;
@@ -85,5 +89,17 @@ public class CarRide {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public boolean isAlreadyBooked() {
+        return alreadyBooked;
+    }
+
+    public boolean getAlreadyBooked() {
+        return alreadyBooked;
+    }
+
+    public void setAlreadyBooked(boolean alreadyBooked) {
+        this.alreadyBooked = alreadyBooked;
     }
 }
