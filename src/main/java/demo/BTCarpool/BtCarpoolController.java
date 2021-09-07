@@ -35,8 +35,12 @@ public class BtCarpoolController {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             model.addAttribute("userName", currentUserName);
+            Employee employee = repository.getEmployee(currentUserName);
+            if (employee!=null){
+                model.addAttribute("employeeId", employee.getId());}
            // return currentUserName;
         }
+        model.addAttribute("bookings", repository.getBookings());
 
         return "startpage";
     }

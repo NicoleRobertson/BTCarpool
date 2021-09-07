@@ -280,4 +280,27 @@ public class CarRideRepository {
         return carRide;
     }
 
+    public List<Booking> getBookings() {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Booking")) {
+
+            while (rs.next()) {
+                bookings.add(rsBooking(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+
+    private Booking rsBooking(ResultSet rs) throws SQLException {
+        return new Booking (rs.getLong("id"),
+                rs.getLong("EMPLOYEE_ID"),
+                rs.getLong("CARRIDE_ID"),
+                rs.getBoolean("ACTIVE"));
+    }
+
 }

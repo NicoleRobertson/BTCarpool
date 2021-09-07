@@ -108,9 +108,12 @@
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
-            <td><a th:href="'/join/' + ${CarRide.id}"  id="click" class="btn btn-outline-success" th:if="${userName != null}" th:text="'Join!'" />
+            <td><a th:href="'/join/' + ${CarRide.id}"  id="click" class="btn btn-outline-success"  th:if="${userName != null}" th:text="'Join!'" />
 	            <span th:if="${userName == null}">
 	            Log in to Join this ride.
+            </span>
+                <span th:each ="booking:${bookings}" th:if="${employeeId!=null && CarRide.id==booking.carrideId && employeeId==booking.employeeId}">
+	            Already booked!
             </span>
             </td>
             </td>
