@@ -205,15 +205,16 @@ public class CarRideRepository {
     }
     public void saveRide(CarRide carride, long vehicleId, long employeeId) {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO CARRIDE(VEHICLE_ID, RIDEDATE, EMPLOYEE_ID, AVAILABLESEATS) VALUES " +
-                     " (?, ?, ?, ?)")) {
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO CARRIDE(VEHICLE_ID, RIDEDATE, EMPLOYEE_ID, OFFICE_ID, AVAILABLESEATS) VALUES " +
+                     " (?, ?, ?, ?, ?)")) {
             ps.setLong(1, vehicleId);
             System.out.println(carride.getDate());
             if (carride.getDate() != null){
                 ps.setDate(2,new java.sql.Date(carride.getDate().getTime()));}
             else {ps.setDate (2, null);}
             ps.setLong(3, employeeId);
-            ps.setInt(4, carride.getAvailableSeats());
+            ps.setInt(4, 1);
+            ps.setInt(5, carride.getAvailableSeats());
             ps.executeUpdate();
 
         } catch (SQLException e) {
