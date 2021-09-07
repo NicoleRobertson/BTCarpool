@@ -96,7 +96,7 @@ public class BtCarpoolController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("image", "'/panoramanature.jpg'");
+        model.addAttribute("image", "'/ocean.jpg'");
         return "login";
     }
 
@@ -106,7 +106,7 @@ public class BtCarpoolController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("vehicle", new Vehicle());
         model.addAttribute("ride", new CarRide());
-        model.addAttribute("image", "'/panoramanature.jpg'");
+        model.addAttribute("image", "'/flowers.jpg'");
         return "createRide";
     }
 

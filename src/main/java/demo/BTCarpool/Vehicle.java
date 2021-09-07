@@ -9,7 +9,7 @@ public class Vehicle {
     @Size(min=1, max=100)
     private int seats;
     @Size(min=1, max=100)
-    private double costPerMile;
+    private Double costPerMile;
     @Size(min=1, max=100)
     private String licensePlate;
     @Size(min=1, max=100)
@@ -52,11 +52,11 @@ public class Vehicle {
         this.seats = seats;
     }
 
-    public double getCostPerMile() {
+    public Double getCostPerMile() {
         return costPerMile;
     }
 
-    public void setCostPerMile(double costPerMile) {
+    public void setCostPerMile(Double costPerMile) {
         this.costPerMile = costPerMile;
     }
 

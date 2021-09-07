@@ -1,12 +1,8 @@
 package demo.BTCarpool;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Date;
 
 //@Setter
 //@Getter
