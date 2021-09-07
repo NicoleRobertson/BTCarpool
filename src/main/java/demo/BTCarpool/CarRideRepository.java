@@ -302,5 +302,27 @@ public class CarRideRepository {
                 rs.getLong("CARRIDE_ID"),
                 rs.getBoolean("ACTIVE"));
     }
+    public Booking cancelBooking(long id, long employeeId) {
+        Booking booking = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+        ) {
+
+            String sql = "UPDATE BOOKING SET BOOKING.ACTIVE = FALSE WHERE BOOKING.CARRIDE_ID = ";
+            String sql2 = " AND BOOKING.EMPLOYEE_ID = ";
+
+            stmt.executeUpdate(sql + id + sql2 + employeeId);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM BOOKING WHERE BOOKING.CARRIDE_ID = " + id + " AND BOOKING.EMPLOYEE_ID =" + employeeId);
+
+            if (rs.next()) {
+                booking =rsBooking(rs);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return booking;
+    }
 
 }

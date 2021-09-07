@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -120,6 +121,88 @@ public class BtCarpoolController {
         int vehicleId = repository.saveVehicle(vehicle, employeeId);
         repository.saveRide(carride, vehicleId, employeeId);
         return "redirect:/create";
+    }
+
+    @GetMapping ("/myrides/{id}")
+    public String myrides(Model model, @PathVariable int id) {
+        List<StartpageCarRides> list = repository.publishedCarRides();
+        List<CarRide> carRides = repository.getCarRides();
+        List<Booking> bookings = repository.getBookings();
+        List<StartpageCarRides> myrides = new ArrayList<>();
+        List<Booking> mybookings = new ArrayList<>();
+        List<Booking> cancelledbookings = new ArrayList<>();
+        List<StartpageCarRides> cancelledrides = new ArrayList<>();
+
+        model.addAttribute("publishedCarRides", list);
+        model.addAttribute("image", "'/panoramanature.jpg'");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            model.addAttribute("userName", currentUserName);
+            Employee employee = repository.getEmployee(currentUserName);
+            model.addAttribute("employee", employee);
+            if (employee != null) {
+                model.addAttribute("employeeId", employee.getId());
+            }
+            // return currentUserName;
+            // Create list to see my active bookings
+            for (Booking b : bookings) {
+                if (b.getEmployeeId() == employee.getId() && b.getActive()){
+                    mybookings.add(b);
+                }
+            }
+
+            for (StartpageCarRides c : list) {
+                for (Booking b : mybookings) {
+                    if (c.getId() == b.getCarrideId()) {
+                       myrides.add(c);
+                    }
+                }
+            }
+            // Create list to see my cancelled bookings
+
+            for (Booking b : bookings) {
+                if (b.getEmployeeId() == employee.getId() && !b.getActive()){
+                    cancelledbookings.add(b);
+                }
+            }
+
+            for (StartpageCarRides c : list) {
+                for (Booking b : cancelledbookings) {
+                    if (c.getId() == b.getCarrideId()) {
+                        cancelledrides.add(c);
+                    }
+                }
+            }
+
+            /*CarRideId.Booking == CarrideId.Carride (alla bokningar för specifik carride - kan vara fler)
+             * (EmployeeId.Booking == EmployeeId.Carride) && (Username.Login == Username.Employee) */
+
+            model.addAttribute("myrides", myrides);
+            model.addAttribute("cancelledrides", cancelledrides);
+
+        }
+
+        return "myRides";
+
+    }
+    @GetMapping ("/cancel/{id}")
+    public String cancel(Model model, @PathVariable int id) {
+        //Find username based on authetication
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        System.out.println(currentUserName);
+
+        //Find employeeId based on UserName
+        Employee employee = repository.getEmployee(currentUserName);
+
+        repository.cancelBooking(id, employee.getId());
+
+
+        return "redirect:/myrides/{id}";
+
     }
 
 }

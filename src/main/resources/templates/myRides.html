@@ -106,20 +106,17 @@
              <th scope="col">Join this Ride</th>
          </tr>
          </thead>
+
          <tbody id="myTable">
-         <tr  th:each="CarRide : ${publishedCarRides}"> <!-- camelcase? -->
+         <H2>Your Booked Rides</H2>
+         <tr  th:each="CarRide : ${myrides}"> <!-- camelcase? -->
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.date}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.officeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
-            <td><a th:href="'/join/' + ${CarRide.id}"  id="click" class="btn btn-outline-success"  th:if="${userName != null && !CarRide.alreadyBooked}" th:text="'Join!'" />
-	            <span th:if="${userName == null}">
-	            Log in to Join this ride.
-            </span>
-                <span th:if="${userName != null && CarRide.alreadyBooked == true}">
-	            Already booked!
-            </span>
+            <td><a th:href="'/cancel/' + ${CarRide.id}"  id="click" class="btn btn-outline-danger"  th:if="${userName != null}" th:text="'Cancel!'" />
+
             </td>
             </td>
 	        
@@ -134,47 +131,34 @@
 	        
         </tr>
         </tbody>
+     </table>
+    <table class="table table-hover">
+         <tbody id="myTable2">
+         <H2>Your Cancelled Rides</H2>
+         <tr  th:each="CarRide : ${cancelledrides}"> <!-- camelcase? -->
+             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.date}" /></td>
+             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.officeName}" /></td>
+             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
+             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
+             <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
+             <td><a th:href="'/join/' + ${CarRide.id}"  id="click2" class="btn btn-outline-success"  th:if="${userName != null}" th:text="'join!'" />
+
+             </td>
+             </td>
+
+             <style>
+                #button{
+                background-color: #C8C8B4;
+                border-radius:2em;
+                button:hover{border-color:#4CAF50}
+                }
+
+            </style>
+
+         </tr>
+         </tbody>
     </table>
 
-    <!-- <div class="row">
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <img class="card-img-top" src="https:/images.ctfassets.net/bi9pvs2ayg6b/4DarfrlijS0a4gwi6SIq0a/015e20d2b4430b42aeb6466a23db8042/shutterstock_1017335230.jpg?w=300" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Are you considering buying an electric bike?</h4>
-                    <p class="card-text">Wondering how an electric bike works? What about the electric bike prize? Here we explain the concepts and technology and give tips on what to think about when you buy an electric bike.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://www.blocket.se/tips-och-guider/cykelguiden/kopa-elcykel" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <img class="card-img-top div.embbed-responsive" src="https:/images.ctfassets.net/bi9pvs2ayg6b/51iZ5gsRPBIAEMtO49PNLE/743bb78ffd7081d1e307b66b526eaf55/cykling_puff.jpg?w=300" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">What does a bike cost?</h4>
-                    <p class="card-text">What is a good price for a used bike? Whether you are selling or buying, it is good to get an idea of what is a low or high price.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://www.blocket.se/tips-och-guider/cykelguiden/vad-kostar-en-cykel" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <img class="card-img-top img-float" src="https:/images.ctfassets.net/bi9pvs2ayg6b/53TAvMglUkMEGYceaEiC2e/f1bbb7fc053f3979647429a11b0c1ec8/tryggt_cykelkop.jpg?w=200" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Make a safe bike purchase</h4>
-                    <p class="card-text">Unfortunately, many bicycles are stolen and resold. Help us keep bike thieves away from Blocket and avoid buying a stolen bike with our simple tips..</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://www.blocket.se/tips-och-guider/cykelguiden/tryggt-cykelkop" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- /.row -->
 
 </div>
 <!-- /.container -->
