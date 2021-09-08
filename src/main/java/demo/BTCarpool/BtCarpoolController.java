@@ -29,7 +29,6 @@ public class BtCarpoolController {
     @GetMapping ("/")
     public String startpage(Model model) {
         List<StartpageCarRides> list = repository.publishedCarRides();
-        List<CarRide> carRides = repository.getCarRides();
         List<Booking> bookings = repository.getBookings();
         model.addAttribute("publishedCarRides", list);
         model.addAttribute("image", "'/panoramanature.jpg'");
@@ -88,10 +87,10 @@ public class BtCarpoolController {
    @GetMapping("/carrides/{id}")
     public String details(Model model, @PathVariable int id) {
         Vehicle details = repository.getVehicle(id);
-        /*Employee employee = repository.getEmployee(id);*/
+        Employee employee = repository.getEmployeeID(details.getEmployeeId());
         model.addAttribute("details", details);
+        model.addAttribute("employeename", employee.getFirstName());
         model.addAttribute("image", "'/panoramanature.jpg'");
-        /*model.addAttribute("employee", employee);*/
         return "carridedetails";
     }
 
@@ -171,6 +170,7 @@ public class BtCarpoolController {
             for (StartpageCarRides c : list) {
                 for (Booking b : cancelledbookings) {
                     if (c.getId() == b.getCarrideId()) {
+                        c.setAlreadyBooked(false);
                         cancelledrides.add(c);
                     }
                 }
@@ -181,6 +181,7 @@ public class BtCarpoolController {
 
             model.addAttribute("myrides", myrides);
             model.addAttribute("cancelledrides", cancelledrides);
+
 
         }
 
@@ -199,7 +200,16 @@ public class BtCarpoolController {
         Employee employee = repository.getEmployee(currentUserName);
 
         repository.cancelBooking(id, employee.getId());
+        //Update the available seats + 1 after cancelling the order
+        repository.getCarRideAfterCancel(id);
 
+        //Update the status already booked of the cancelled rides!
+        List<StartpageCarRides> list = repository.publishedCarRides();
+        for (StartpageCarRides c : list) {
+                if (c.getId() == id ) {
+                    c.setAlreadyBooked(false);
+                }
+            }
 
         return "redirect:/myrides/{id}";
 

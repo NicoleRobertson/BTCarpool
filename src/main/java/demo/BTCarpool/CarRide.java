@@ -22,7 +22,7 @@ public class CarRide {
     //@Size(min=1, max=100)
     private Integer availableSeats;
     //@Size(min=1, max=100)
-    private boolean alreadyBooked = false;
+    /*private boolean alreadyBooked = false;*/
 
 
 
@@ -87,15 +87,15 @@ public class CarRide {
         this.availableSeats = availableSeats;
     }
 
-    public boolean isAlreadyBooked() {
+    /*public boolean isAlreadyBooked() {
         return alreadyBooked;
     }
 
     public boolean getAlreadyBooked() {
         return alreadyBooked;
-    }
+
 
     public void setAlreadyBooked(boolean alreadyBooked) {
         this.alreadyBooked = alreadyBooked;
-    }
+    }*/
 }

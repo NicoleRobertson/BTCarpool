@@ -133,6 +133,16 @@
         </tbody>
      </table>
     <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Office</th>
+            <th scope="col">Pickup zone</th>
+            <th scope="col">Driver</th>
+            <th scope="col">Available Seats</th>
+            <th scope="col">Join this Ride</th>
+        </tr>
+        </thead>
          <tbody id="myTable2">
          <H2>Your Cancelled Rides</H2>
          <tr  th:each="CarRide : ${cancelledrides}"> <!-- camelcase? -->
@@ -141,8 +151,8 @@
              <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.zipCode}" /></td>
              <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.employeeName}" /></td>
              <td><a th:href="'/carrides/' + ${CarRide.id}" p th:text="${CarRide.availableSeats}" /></td>
-             <td><a th:href="'/join/' + ${CarRide.id}"  id="click2" class="btn btn-outline-success"  th:if="${userName != null}" th:text="'join!'" />
-
+             <!--<td><a th:href="'/join/' + ${CarRide.id}"  id="click2" class="btn btn-outline-success"  th:if="${userName != null}" th:text="'join!'" />-->
+             <td><a  th:text="'Cancelled!'" />
              </td>
              </td>
 

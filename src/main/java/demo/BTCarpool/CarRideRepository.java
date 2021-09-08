@@ -68,11 +68,11 @@ public class CarRideRepository {
     INNER JOIN Employee ON Vehicle.Employee_id=Employee.id where vehicle.id = 1*/
 
 
-    public Employee getEmployee(long id) {
+    public Employee getEmployeeID(long id) {
         Employee employee = null;
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * from Employee join on Vehicle where vehicle.id = " + id)) {
+             ResultSet rs = stmt.executeQuery("SELECT * from Employee where employee.ID = " + id)) {
 
             if (rs.next()) {
                 employee = rsEmployee(rs);
@@ -324,6 +324,28 @@ public class CarRideRepository {
             e.printStackTrace();
         }
         return booking;
+    }
+
+    public CarRide getCarRideAfterCancel(long id) {
+        CarRide carRide = null;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+        ) {
+
+            String sql = "UPDATE CARRIDE SET CARRIDE.AVAILABLESEATS = (CARRIDE.AVAILABLESEATS + 1) WHERE CARRIDE.ID = ";
+
+            stmt.executeUpdate(sql + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CARRIDE WHERE CARRIDE.ID = " + id);
+
+            if (rs.next()) {
+                carRide = rsCarRide(rs);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return carRide;
     }
 
 }

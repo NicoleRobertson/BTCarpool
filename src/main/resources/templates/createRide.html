@@ -13,9 +13,13 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../static/css/style.css" th:href="'css/style.css'">
     <!--Bootstrap calendar-->
-    <link th:rel="stylesheet" th:href="@{/css/datepicker.css}"/>
+    <!--<link th:rel="stylesheet" th:href="@{/css/datepicker.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker-standalone.css">
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
 </head>
 
 <body>
@@ -140,17 +144,28 @@
 		<h5 style="text-align:center">Details for this ride</h5>
     <div class="master-div" style="margin-left: 300px; margin-right: 100px">
 		<div class="form-row" th:object="${ride}">
-		   <div class="form-group">
-				<label for="date">Date:</label>
-				<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-					<input type="text" placeholder="yyyy-mm-dd" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-						   th:field="*{date}" id="date"/>
-					<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+            <div class="form-group">
+                 <label for="date">Date:</label>
+                 <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                     <input type="text" placeholder="yyyy-mm-dd" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                            th:field="*{date}" id="date"/>
+                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
 						<!--<button style='font-size:24px'> <i class='fas fa-calendar-alt'></i></button>-->
                     <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                 </div>
             </div>
         </div>
+            <!--<div class="input-group date" data-provide="datepicker">
+                <input type="text" placeholder="yyyy-mm-dd" class="form-control" th:field="*{date}">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+            <script>$.fn.datepicker.defaults.format = "yyyy-mm-dd";
+                    $('.datepicker').datepicker({
+                    startDate: '-3d'
+                    });
+             </script>-->
         <div class="form-group col-md-4">
             <label for="available">Available Seats</label>
             <input type="text" class="form-control" id="available" th:field="*{availableSeats}">
