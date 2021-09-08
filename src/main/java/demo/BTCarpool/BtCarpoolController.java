@@ -51,9 +51,6 @@ public class BtCarpoolController {
                 }
             }
 
-            /*CarRideId.Booking == CarrideId.Carride (alla bokningar för specifik carride - kan vara fler)
-             * (EmployeeId.Booking == EmployeeId.Carride) && (Username.Login == Username.Employee) */
-
             model.addAttribute("bookings", repository.getBookings());
 
         }
@@ -90,7 +87,7 @@ public class BtCarpoolController {
         Vehicle details = repository.getVehicle(id);
         /*Employee employee = repository.getEmployee(id);*/
         model.addAttribute("details", details);
-        model.addAttribute("image", "'/panoramanature.jpg'");
+        model.addAttribute("image", "'/forest2.jpg'");
         /*model.addAttribute("employee", employee);*/
         return "carridedetails";
     }
