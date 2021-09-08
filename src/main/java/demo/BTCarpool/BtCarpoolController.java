@@ -44,14 +44,12 @@ public class BtCarpoolController {
             // return currentUserName;
             for (StartpageCarRides c : list) {
                 for (Booking b : bookings) {
-                    if (c.getId() == b.getCarrideId() && employee.getId() == b.getEmployeeId()) {
+                    if (c.getId() == b.getCarrideId() && employee.getId() == b.getEmployeeId() && b.getActive()) { //added b.getActive so that already booked changes to Join after a cancellation.
                         c.setAlreadyBooked(true);
                     }
                 }
             }
 
-            /*CarRideId.Booking == CarrideId.Carride (alla bokningar för specifik carride - kan vara fler)
-             * (EmployeeId.Booking == EmployeeId.Carride) && (Username.Login == Username.Employee) */
 
             model.addAttribute("bookings", repository.getBookings());
 
@@ -206,7 +204,7 @@ public class BtCarpoolController {
         //Update the status already booked of the cancelled rides!
         List<StartpageCarRides> list = repository.publishedCarRides();
         for (StartpageCarRides c : list) {
-                if (c.getId() == id ) {
+                if (c.getId() == id) {
                     c.setAlreadyBooked(false);
                 }
             }
