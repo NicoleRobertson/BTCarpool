@@ -31,7 +31,7 @@ public class BtCarpoolController {
         List<StartpageCarRides> list = repository.publishedCarRides();
         List<Booking> bookings = repository.getBookings();
         model.addAttribute("publishedCarRides", list);
-        model.addAttribute("image", "'/panoramanature.jpg'");
+        model.addAttribute("image", "'/blurrygreen.jpg'");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -49,7 +49,6 @@ public class BtCarpoolController {
                     }
                 }
             }
-
 
             model.addAttribute("bookings", repository.getBookings());
 
@@ -89,6 +88,8 @@ public class BtCarpoolController {
         model.addAttribute("details", details);
         model.addAttribute("employeename", employee.getFirstName());
         model.addAttribute("image", "'/panoramanature.jpg'");
+        model.addAttribute("image", "'/forest2.jpg'");
+        /*model.addAttribute("employee", employee);*/
         return "carridedetails";
     }
 
@@ -104,7 +105,7 @@ public class BtCarpoolController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("vehicle", new Vehicle());
         model.addAttribute("ride", new CarRide());
-        model.addAttribute("image", "'/flowers.jpg'");
+        model.addAttribute("image", "'/leavesblack.jpg'");
         return "createRide";
     }
 
