@@ -31,7 +31,7 @@ public class BtCarpoolController {
         List<StartpageCarRides> list = repository.publishedCarRides();
         List<Booking> bookings = repository.getBookings();
         model.addAttribute("publishedCarRides", list);
-        model.addAttribute("image", "'/blurrygreen.jpg'");
+        model.addAttribute("image", "'/panoramanature.jpg'");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
